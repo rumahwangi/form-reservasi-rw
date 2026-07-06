@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rumah Wangi Living Spa – Premium wellness, beauty & family spa di Indramayu. Pesan treatment terbaik untuk tubuh, kulit, dan keluarga Anda.">
+<title>Rumah Wangi Living Spa – Premium Wellness & Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --primary: #6B4337;
+    --secondary: #D12884;
+    --bg: #F3EEEA;
+    --bg-light: #FAF7F4;
+    --text: #3A2B27;
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --cream: #F8F2EC;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  .font-display { font-family: 'Cormorant Garamond', serif; }
+
+  /* Texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+  /* HERO */
+  .hero-bg {
+    background: linear-gradient(160deg, #2a1510 0%, #6B4337 45%, #9B3070 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(209,40,132,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse at 20% 80%, rgba(201,169,110,0.12) 0%, transparent 60%);
+  }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: float 8s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .anim-1 { animation: fadeUp 0.8s ease forwards; }
+  .anim-2 { animation: fadeUp 0.8s 0.2s ease forwards; opacity: 0; }
+  .anim-3 { animation: fadeUp 0.8s 0.4s ease forwards; opacity: 0; }
+  .anim-4 { animation: fadeUp 0.8s 0.6s ease forwards; opacity: 0; }
+
+  /* Gold divider */
+  .gold-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto;
+  }
+
+  /* Branch Cards */
+  .branch-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .branch-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(107,67,55,0.05), rgba(209,40,132,0.05));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .branch-card:hover::before, .branch-card.active::before { opacity: 1; }
+  .branch-card.active {
+    border-color: var(--secondary);
+    box-shadow: 0 8px 30px rgba(209,40,132,0.2);
+  }
+  .branch-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(107,67,55,0.15);
+  }
+
+  /* Person Cards */
+  .person-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+  .person-card.active {
+    border-color: var(--secondary);
+    background: linear-gradient(135deg, rgba(209,40,132,0.08), rgba(107,67,55,0.08));
+  }
+  .person-card:hover { transform: translateY(-3px); }
+
+  /* Treatment Cards */
+  .treatment-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .treatment-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  .treatment-card:hover::after { transform: scaleX(1); }
+  .treatment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(107,67,55,0.15);
+  }
+
+  /* Signature / Lymphatic */
+  .signature-card {
+    background: linear-gradient(135deg, #2a1510, #4a1f30);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .signature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Tab system */
+  .tab-btn {
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+  }
+  .tab-btn.active {
+    border-bottom-color: var(--secondary);
+    color: var(--secondary);
+  }
+
+  /* Price table */
+  .price-row {
+    transition: background 0.2s;
+  }
+  .price-row:hover {
+    background: rgba(107,67,55,0.05);
+  }
+
+  /* Quiz */
+  .quiz-option {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+  }
+  .quiz-option.selected {
+    border-color: var(--secondary);
+    background: rgba(209,40,132,0.08);
+  }
+  .quiz-option:hover { transform: scale(1.02); }
+
+  /* Testimonial */
+  .testimonial-card {
+    position: relative;
+  }
+  .testimonial-card::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: var(--secondary);
+    opacity: 0.15;
+    position: absolute;
+    top: -10px; left: 10px;
+    line-height: 1;
+  }
+
+  /* Floating WhatsApp */
+  .wa-float {
+    position: fixed;
+    bottom: 90px; right: 20px;
+    z-index: 100;
+    animation: pulse-wa 2s infinite;
+  }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(37,211,102,0); }
+  }
+
+  /* Sticky CTA */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 99;
+    backdrop-filter: blur(12px);
+    background: rgba(58,43,39,0.95);
+    border-top: 1px solid rgba(201,169,110,0.3);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
+  .sticky-cta.show { transform: translateY(0); }
+
+  /* Accordion */
+  .faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .faq-body.open { max-height: 300px; }
+  .faq-icon { transition: transform 0.3s; }
+  .faq-icon.open { transform: rotate(45deg); }
+
+  /* Section reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Category tabs */
+  .cat-tab {
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.25s;
+    border-radius: 100px;
+    border: 1.5px solid rgba(107,67,55,0.2);
+  }
+  .cat-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  .cat-tab:hover:not(.active) {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  /* Category panel */
+  .cat-panel { display: none; }
+  .cat-panel.active { display: block; }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(43,21,16,0.97);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--secondary), #a01560);
+    color: white;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.5s;
+  }
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(209,40,132,0.4); }
+
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: white;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: white;
+  }
+
+  .stars { color: #F5C518; }
+
+  /* Form */
+  .form-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: white;
+    border: 1.5px solid rgba(107,67,55,0.2);
+    border-radius: 12px;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-input:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(209,40,132,0.1);
+  }
+
+  select.form-input { appearance: none; cursor: pointer; }
+
+  /* Section heading */
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+
+  .price-badge {
+    background: linear-gradient(135deg, var(--primary), #9B3070);
+    color: white;
+    border-radius: 100px;
+    padding: 2px 12px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    background: rgba(43,21,16,0.98);
+    backdrop-filter: blur(20px);
+  }
+
+  @media (min-width: 768px) {
+    .wa-float { bottom: 40px; right: 30px; }
+    .sticky-cta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav id="navbar" class="py-4 px-5">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,var(--primary),var(--secondary))">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+          <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+        </svg>
+      </div>
+      <div>
+        <p class="text-white font-display text-lg leading-tight font-medium">Rumah Wangi</p>
+        <p class="text-xs leading-tight" style="color:var(--gold-light);letter-spacing:0.1em">LIVING SPA</p>
+      </div>
+    </div>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#treatments" class="text-sm text-white/70 hover:text-white transition-colors">Treatments</a>
+      <a href="#prices" class="text-sm text-white/70 hover:text-white transition-colors">Price List</a>
+      <a href="#about" class="text-sm text-white/70 hover:text-white transition-colors">About</a>
+      <a href="#booking" class="btn-primary px-5 py-2 rounded-full text-sm font-medium">Book Now</a>
+    </div>
+    <button onclick="toggleMenu()" class="md:hidden text-white p-1" id="menu-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12h18M3 6h18M3 18h18"/>
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden mobile-menu mt-4 mx-0 rounded-2xl p-6 absolute left-4 right-4 top-full">
+    <div class="flex flex-col gap-4">
+      <a href="#treatments" onclick="toggleMenu()" class="text-white/80 hover:text-white py-2 border-b border-white/10">Treatments</a>
+      <a href="#branch" onclick="toggleMenu()" class="text-white/80 hover:text-white py-2 border-b border-white/10">Choose Branch</a>
+      <a href="#prices" onclick="toggleMenu()" class="text-white/80 hover:text-white py-2 border-b border-white/10">Price List</a>
+      <a href="#booking" onclick="toggleMenu()" class="btn-primary text-center py-3 rounded-full font-medium mt-2">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero-bg min-h-screen flex flex-col items-center justify-center px-5 pt-20 pb-16 relative">
+  <!-- Orbs -->
+  <div class="hero-orb" style="width:300px;height:300px;background:rgba(209,40,132,0.12);top:-50px;right:-100px;animation-delay:0s"></div>
+  <div class="hero-orb" style="width:200px;height:200px;background:rgba(201,169,110,0.1);bottom:50px;left:-80px;animation-delay:3s"></div>
+  <div class="hero-orb" style="width:150px;height:150px;background:rgba(107,67,55,0.2);top:40%;left:10%;animation-delay:5s"></div>
+
+  <!-- Decorative petals -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <svg class="absolute top-20 right-8 opacity-10" width="120" height="120" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="55" stroke="white" stroke-width="0.5"/>
+      <circle cx="60" cy="60" r="35" stroke="white" stroke-width="0.5"/>
+      <path d="M60 5 Q80 30 60 55 Q40 30 60 5Z" fill="white" opacity="0.3"/>
+      <path d="M60 5 Q80 30 60 55 Q40 30 60 5Z" fill="white" opacity="0.3" transform="rotate(60 60 60)"/>
+      <path d="M60 5 Q80 30 60 55 Q40 30 60 5Z" fill="white" opacity="0.3" transform="rotate(120 60 60)"/>
+      <path d="M60 5 Q80 30 60 55 Q40 30 60 5Z" fill="white" opacity="0.3" transform="rotate(180 60 60)"/>
+      <path d="M60 5 Q80 30 60 55 Q40 30 60 5Z" fill="white" opacity="0.3" transform="rotate(240 60 60)"/>
+      <path d="M60 5 Q80 30 60 55 Q40 30 60 5Z" fill="white" opacity="0.3" transform="rotate(300 60 60)"/>
+    </svg>
+    <svg class="absolute bottom-20 left-8 opacity-8" width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <circle cx="40" cy="40" r="38" stroke="#C9A96E" stroke-width="0.5"/>
+      <circle cx="40" cy="40" r="22" stroke="#C9A96E" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <div class="relative z-10 text-center max-w-2xl mx-auto">
+    <!-- Logo -->
+    <div class="anim-1 flex flex-col items-center mb-8">
+      <div class="w-20 h-20 rounded-full flex items-center justify-center mb-4 border border-white/20" style="background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="18" stroke="#C9A96E" stroke-width="0.8"/>
+          <path d="M20 5 Q27 12 20 20 Q13 12 20 5Z" fill="#C9A96E" opacity="0.7"/>
+          <path d="M20 5 Q27 12 20 20 Q13 12 20 5Z" fill="#C9A96E" opacity="0.7" transform="rotate(72 20 20)"/>
+          <path d="M20 5 Q27 12 20 20 Q13 12 20 5Z" fill="#C9A96E" opacity="0.7" transform="rotate(144 20 20)"/>
+          <path d="M20 5 Q27 12 20 20 Q13 12 20 5Z" fill="#C9A96E" opacity="0.7" transform="rotate(216 20 20)"/>
+          <path d="M20 5 Q27 12 20 20 Q13 12 20 5Z" fill="#C9A96E" opacity="0.7" transform="rotate(288 20 20)"/>
+          <circle cx="20" cy="20" r="4" fill="#C9A96E"/>
+        </svg>
+      </div>
+      <p class="text-xs font-medium tracking-widest text-white/50 uppercase">Rumah Wangi</p>
+      <p class="text-xs tracking-widest uppercase" style="color:var(--gold);letter-spacing:0.3em">Living Spa</p>
+    </div>
+
+    <div class="anim-2">
+      <div class="gold-line mb-6"></div>
+      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6" style="font-weight:300">
+        Find The Perfect Treatment For Your<br>
+        <span style="color:var(--gold)" class="italic">Body, Skin, And Family</span>
+      </h1>
+      <div class="gold-line mb-6"></div>
+    </div>
+
+    <p class="anim-3 text-base md:text-lg text-white/70 mb-10 font-light leading-relaxed">
+      Choose your branch, discover the right treatment,<br class="hidden md:inline"> and book in minutes.
+    </p>
+
+    <div class="anim-4 flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#booking" class="btn-primary px-8 py-4 rounded-full font-medium text-base inline-flex items-center justify-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Book Now
+      </a>
+      <a href="#prices" class="btn-outline px-8 py-4 rounded-full font-medium text-base inline-flex items-center justify-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        View Price List
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="anim-4 mt-14 grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
+      <div>
+        <p class="font-display text-3xl text-white" style="font-weight:300">2K+</p>
+        <p class="text-xs text-white/50 mt-1">Happy Clients</p>
+      </div>
+      <div class="border-x border-white/10">
+        <p class="font-display text-3xl text-white" style="font-weight:300">50+</p>
+        <p class="text-xs text-white/50 mt-1">Treatments</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl text-white" style="font-weight:300">5★</p>
+        <p class="text-xs text-white/50 mt-1">Rating</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30">
+    <p class="text-xs tracking-widest uppercase">Scroll</p>
+    <div class="w-px h-8 bg-gradient-to-b from-white/30 to-transparent animate-pulse"></div>
+  </div>
+</section>
+
+<!-- ============ SECTION 2: CHOOSE BRANCH ============ -->
+<section id="branch" class="py-16 px-5" style="background:var(--bg-light)">
+  <div class="max-w-4xl mx-auto reveal">
+    <div class="text-center mb-10">
+      <p class="section-label mb-3">Step 1</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-3" style="color:var(--primary);font-weight:400">Choose Your Branch</h2>
+      <p class="text-sm text-gray-500 font-light">Select a location to see the full treatment menu & pricing</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <!-- Branch 1 -->
+      <div class="branch-card bg-white rounded-2xl p-6 md:p-8" data-branch="indramayu" onclick="selectBranch('indramayu')">
+        <div class="flex items-start gap-4 mb-5">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,var(--primary),#9B3070)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-display text-xl" style="color:var(--primary);font-weight:500">Indramayu</h3>
+            <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mt-0.5">Main Branch · Flagship</p>
+          </div>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Indramayu, Jawa Barat
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Buka: 09.00 – 20.00 WIB
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 7.2 19.79 19.79 0 01-.07 4.6 2 2 0 012 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 10a16 16 0 006 6l.55-.55a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120 17.56z"/></svg>
+            WhatsApp tersedia
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-5">
+          <span class="text-xs px-3 py-1 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">All Treatments</span>
+          <span class="text-xs px-3 py-1 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Baby Spa</span>
+          <span class="text-xs px-3 py-1 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Lymphatic</span>
+        </div>
+        <div id="check-indramayu" class="hidden items-center gap-2 text-sm font-medium" style="color:var(--secondary)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          Branch Dipilih
+        </div>
+        <div id="select-indramayu" class="text-sm font-medium" style="color:var(--primary)">Pilih Cabang →</div>
+      </div>
+
+      <!-- Branch 2 -->
+      <div class="branch-card bg-white rounded-2xl p-6 md:p-8" data-branch="terisi" onclick="selectBranch('terisi')">
+        <div class="flex items-start gap-4 mb-5">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#9B3070,var(--secondary))">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-display text-xl" style="color:var(--primary);font-weight:500">Terisi</h3>
+            <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mt-0.5">Branch · Cabang 2</p>
+          </div>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Terisi, Indramayu, Jawa Barat
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Buka: 09.00 – 20.00 WIB
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 7.2 19.79 19.79 0 01-.07 4.6 2 2 0 012 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 10a16 16 0 006 6l.55-.55a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120 17.56z"/></svg>
+            WhatsApp tersedia
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-5">
+          <span class="text-xs px-3 py-1 rounded-full" style="background:rgba(209,40,132,0.08);color:var(--secondary)">All Treatments</span>
+          <span class="text-xs px-3 py-1 rounded-full" style="background:rgba(209,40,132,0.08);color:var(--secondary)">Baby Spa</span>
+          <span class="text-xs px-3 py-1 rounded-full" style="background:rgba(209,40,132,0.08);color:var(--secondary)">Salon</span>
+        </div>
+        <div id="check-terisi" class="hidden items-center gap-2 text-sm font-medium" style="color:var(--secondary)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          Branch Dipilih
+        </div>
+        <div id="select-terisi" class="text-sm font-medium" style="color:var(--primary)">Pilih Cabang →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 3: WHO IS THIS FOR ============ -->
+<section class="py-16 px-5" style="background:var(--bg)">
+  <div class="max-w-4xl mx-auto reveal">
+    <div class="text-center mb-10">
+      <p class="section-label mb-3">Step 2</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-3" style="color:var(--primary);font-weight:400">Who Is The Treatment For?</h2>
+      <p class="text-sm text-gray-500 font-light">Pilih untuk melihat treatment yang sesuai</p>
+    </div>
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-3" id="person-grid">
+      <!-- Female -->
+      <div class="person-card bg-white rounded-2xl p-4 text-center cursor-pointer" onclick="selectPerson(this,'female')">
+        <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style="background:linear-gradient(135deg,rgba(107,67,55,0.1),rgba(209,40,132,0.1))">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--secondary)">
+            <circle cx="12" cy="8" r="5"/><path d="M12 13v9M9 19h6"/>
+          </svg>
+        </div>
+        <p class="text-xs font-medium" style="color:var(--text)">Wanita</p>
+        <p class="text-xs text-gray-400 mt-0.5">Female</p>
+      </div>
+      <!-- Male -->
+      <div class="person-card bg-white rounded-2xl p-4 text-center cursor-pointer" onclick="selectPerson(this,'male')">
+        <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style="background:linear-gradient(135deg,rgba(107,67,55,0.1),rgba(107,67,55,0.05))">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--primary)">
+            <circle cx="10" cy="14" r="5"/><path d="M21 3l-6 6M15 3h6v6"/>
+          </svg>
+        </div>
+        <p class="text-xs font-medium" style="color:var(--text)">Pria</p>
+        <p class="text-xs text-gray-400 mt-0.5">Male</p>
+      </div>
+      <!-- Baby Girl -->
+      <div class="person-card bg-white rounded-2xl p-4 text-center cursor-pointer" onclick="selectPerson(this,'baby-girl')">
+        <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style="background:linear-gradient(135deg,rgba(209,40,132,0.15),rgba(209,40,132,0.05))">
+          <span class="text-xl">👶</span>
+        </div>
+        <p class="text-xs font-medium" style="color:var(--text)">Bayi Perempuan</p>
+        <p class="text-xs text-gray-400 mt-0.5">0-6 Tahun</p>
+      </div>
+      <!-- Baby Boy -->
+      <div class="person-card bg-white rounded-2xl p-4 text-center cursor-pointer" onclick="selectPerson(this,'baby-boy')">
+        <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style="background:linear-gradient(135deg,rgba(107,67,55,0.12),rgba(107,67,55,0.05))">
+          <span class="text-xl">👶</span>
+        </div>
+        <p class="text-xs font-medium" style="color:var(--text)">Bayi Laki-laki</p>
+        <p class="text-xs text-gray-400 mt-0.5">0-6 Tahun</p>
+      </div>
+      <!-- Pregnant -->
+      <div class="person-card bg-white rounded-2xl p-4 text-center cursor-pointer" onclick="selectPerson(this,'pregnant')">
+        <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style="background:linear-gradient(135deg,rgba(201,169,110,0.2),rgba(201,169,110,0.1))">
+          <span class="text-xl">🤰</span>
+        </div>
+        <p class="text-xs font-medium" style="color:var(--text)">Ibu Hamil</p>
+        <p class="text-xs text-gray-400 mt-0.5">Pregnant Mom</p>
+      </div>
+      <!-- Postpartum -->
+      <div class="person-card bg-white rounded-2xl p-4 text-center cursor-pointer" onclick="selectPerson(this,'postpartum')">
+        <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style="background:linear-gradient(135deg,rgba(107,67,55,0.1),rgba(209,40,132,0.1))">
+          <span class="text-xl">👩‍🍼</span>
+        </div>
+        <p class="text-xs font-medium" style="color:var(--text)">Ibu Pasca Lahir</p>
+        <p class="text-xs text-gray-400 mt-0.5">Postpartum Mom</p>
+      </div>
+    </div>
+    <!-- Recommendation hint -->
+    <div id="person-reco" class="hidden mt-6 p-4 rounded-2xl text-center" style="background:rgba(209,40,132,0.07);border:1px solid rgba(209,40,132,0.15)">
+      <p class="text-sm" style="color:var(--secondary)">✨ <span id="person-reco-text">Treatment yang direkomendasikan akan ditampilkan di bawah.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 4: TREATMENT CATEGORIES ============ -->
+<section id="treatments" class="py-16 px-5" style="background:var(--bg-light)">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <p class="section-label mb-3">Step 3</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-3" style="color:var(--primary);font-weight:400">Our Treatment Menu</h2>
+      <p class="text-sm text-gray-500 font-light">Pilih kategori treatment yang Anda butuhkan</p>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="overflow-x-auto pb-3 mb-8 reveal">
+      <div class="flex gap-2 min-w-max px-1" id="cat-tabs">
+        <button class="cat-tab px-4 py-2 text-sm font-medium active" onclick="switchCat('massage',this)">💆 Body Massage</button>
+        <button class="cat-tab px-4 py-2 text-sm font-medium" onclick="switchCat('body',this)">🛁 Body Treatment</button>
+        <button class="cat-tab px-4 py-2 text-sm font-medium" onclick="switchCat('facial',this)">✨ Facial</button>
+        <button class="cat-tab px-4 py-2 text-sm font-medium" onclick="switchCat('salon',this)">💅 Salon</button>
+        <button class="cat-tab px-4 py-2 text-sm font-medium" onclick="switchCat('gentlemen',this)">🧔 Gentlemen</button>
+        <button class="cat-tab px-4 py-2 text-sm font-medium" onclick="switchCat('packages',this)">🎁 Packages</button>
+        <button class="cat-tab px-4 py-2 text-sm font-medium" onclick="switchCat('baby',this)">🍼 Baby Spa</button>
+        <button class="cat-tab px-4 py-2 text-sm font-medium" onclick="switchCat('momkids',this)">👩‍👧 Mom & Kids</button>
+        <button class="cat-tab px-4 py-2 text-sm font-medium" onclick="switchCat('lymphatic',this)">⭐ Lymphatic</button>
+      </div>
+    </div>
+
+    <!-- BODY MASSAGE -->
+    <div class="cat-panel active" id="panel-massage">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <?php
+        $massages = [
+          ['Javanese Massage','Pijat Jawa tradisional untuk relaksasi total','60–90 mnt','🌿'],
+          ['Balinese Massage','Teknik Bali menenangkan otot dan pikiran','60–90 mnt','🌺'],
+          ['Aromatherapy Massage','Essential oil pilihan untuk keseimbangan aura','60–90 mnt','🌸'],
+          ['Mom To Be Massage','Aman untuk ibu hamil, mengurangi ketidaknyamanan','60 mnt','🤰'],
+          ['Reflexology','Pijat titik refleksi kaki untuk energi tubuh','45–60 mnt','👣'],
+          ['Back Massage','Fokus punggung dan bahu, hilangkan ketegangan','45 mnt','🧘'],
+        ];
+        ?>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl mb-3">🌿</div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Javanese Massage</h4>
+          <p class="text-sm text-gray-500 mb-3">Pijat Jawa tradisional untuk relaksasi total</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-400">60 – 90 mnt</span>
+            <button onclick="bookTreatment('Javanese Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button>
+          </div>
+        </div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl mb-3">🌺</div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Balinese Massage</h4>
+          <p class="text-sm text-gray-500 mb-3">Teknik Bali menenangkan otot dan pikiran</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-400">60 – 90 mnt</span>
+            <button onclick="bookTreatment('Balinese Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button>
+          </div>
+        </div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl mb-3">🌸</div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Aromatherapy Massage</h4>
+          <p class="text-sm text-gray-500 mb-3">Essential oil pilihan untuk keseimbangan aura</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-400">60 – 90 mnt</span>
+            <button onclick="bookTreatment('Aromatherapy Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button>
+          </div>
+        </div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl mb-3">🤰</div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Mom To Be Massage</h4>
+          <p class="text-sm text-gray-500 mb-3">Aman untuk ibu hamil, mengurangi ketidaknyamanan</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-400">60 mnt</span>
+            <button onclick="bookTreatment('Mom To Be Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button>
+          </div>
+        </div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl mb-3">👣</div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Reflexology</h4>
+          <p class="text-sm text-gray-500 mb-3">Pijat titik refleksi kaki untuk energi tubuh</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-400">45 – 60 mnt</span>
+            <button onclick="bookTreatment('Reflexology')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button>
+          </div>
+        </div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl mb-3">🧘</div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Back Massage</h4>
+          <p class="text-sm text-gray-500 mb-3">Fokus punggung dan bahu, hilangkan ketegangan</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-400">45 mnt</span>
+            <button onclick="bookTreatment('Back Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY TREATMENT -->
+    <div class="cat-panel" id="panel-body">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🧴</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Body Scrub</h4><p class="text-sm text-gray-500 mb-3">Eksfoliasi alami untuk kulit halus bercahaya</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45–60 mnt</span><button onclick="bookTreatment('Body Scrub')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🌾</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Body Mask</h4><p class="text-sm text-gray-500 mb-3">Masker tubuh nutrisi mendalam untuk kulit sehat</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45 mnt</span><button onclick="bookTreatment('Body Mask')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🛁</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Body Bath</h4><p class="text-sm text-gray-500 mb-3">Mandi herbal mewah dengan aromaterapi pilihan</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">30 mnt</span><button onclick="bookTreatment('Body Bath')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">♨️</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Sauna</h4><p class="text-sm text-gray-500 mb-3">Detoksifikasi pori dan relaksasi mendalam</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">30 mnt</span><button onclick="bookTreatment('Sauna')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">💆‍♀️</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Breast Care</h4><p class="text-sm text-gray-500 mb-3">Perawatan payudara untuk kesehatan & kecantikan</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45 mnt</span><button onclick="bookTreatment('Breast Care')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">✋</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Totok Treatment</h4><p class="text-sm text-gray-500 mb-3">Teknik akupresur tubuh untuk vitalitas optimal</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45 mnt</span><button onclick="bookTreatment('Totok Treatment')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+      </div>
+    </div>
+
+    <!-- FACIAL -->
+    <div class="cat-panel" id="panel-facial">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">⏳</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Anti Aging Facial</h4><p class="text-sm text-gray-500 mb-3">Peremajaan kulit, kurangi garis halus & kerutan</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">75 mnt</span><button onclick="bookTreatment('Anti Aging Facial')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🌊</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Acne Facial</h4><p class="text-sm text-gray-500 mb-3">Atasi jerawat & bekasnya dengan deep cleansing</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">75 mnt</span><button onclick="bookTreatment('Acne Facial')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">✨</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Skin Tightening Facial</h4><p class="text-sm text-gray-500 mb-3">Kencangkan kulit & perbaiki elastisitas wajah</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">75 mnt</span><button onclick="bookTreatment('Skin Tightening Facial')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🌟</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Dark Spot Facial</h4><p class="text-sm text-gray-500 mb-3">Cerahkan flek hitam & meratakan warna kulit</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">75 mnt</span><button onclick="bookTreatment('Dark Spot Facial')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🫧</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Totok Wajah</h4><p class="text-sm text-gray-500 mb-3">Teknik totok wajah tradisional untuk kecantikan alami</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">60 mnt</span><button onclick="bookTreatment('Totok Wajah')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">💎</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Accu Derma</h4><p class="text-sm text-gray-500 mb-3">Perawatan dermal advanced untuk kulit optimal</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">90 mnt</span><button onclick="bookTreatment('Accu Derma')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+      </div>
+    </div>
+
+    <!-- SALON -->
+    <div class="cat-panel" id="panel-salon">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">💇‍♀️</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Hair Spa</h4><p class="text-sm text-gray-500 mb-3">Perawatan rambut menyeluruh, kilap & sehat</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">60 mnt</span><button onclick="bookTreatment('Hair Spa')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🌿</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Hair Mask</h4><p class="text-sm text-gray-500 mb-3">Masker rambut intensif untuk nutrisi & kelembaban</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45 mnt</span><button onclick="bookTreatment('Hair Mask')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🧖‍♀️</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Creambath</h4><p class="text-sm text-gray-500 mb-3">Creambath tradisional dengan pijat kepala relaksasi</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">60 mnt</span><button onclick="bookTreatment('Creambath')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">✂️</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Hair Treatment</h4><p class="text-sm text-gray-500 mb-3">Perawatan rambut khusus sesuai jenis & kondisi</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">60 mnt</span><button onclick="bookTreatment('Hair Treatment')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">💅</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Manicure</h4><p class="text-sm text-gray-500 mb-3">Perawatan tangan & kuku untuk penampilan sempurna</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45 mnt</span><button onclick="bookTreatment('Manicure')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🦶</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Pedicure</h4><p class="text-sm text-gray-500 mb-3">Perawatan kaki & kuku, kulit lembut bersih</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45 mnt</span><button onclick="bookTreatment('Pedicure')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+      </div>
+    </div>
+
+    <!-- GENTLEMEN -->
+    <div class="cat-panel" id="panel-gentlemen">
+      <div class="p-6 rounded-2xl mb-6 text-center" style="background:linear-gradient(135deg,rgba(107,67,55,0.05),rgba(58,43,39,0.08))">
+        <p class="font-display text-xl mb-2" style="color:var(--primary);font-weight:400">Men's Wellness Zone</p>
+        <p class="text-sm text-gray-500">Treatment eksklusif dirancang khusus untuk pria</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">💪</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Men's Deep Tissue</h4><p class="text-sm text-gray-500 mb-3">Pijat tekanan dalam untuk otot tegang & lelah</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">60–90 mnt</span><button onclick="bookTreatment('Men\'s Deep Tissue')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🧔</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Men's Facial Care</h4><p class="text-sm text-gray-500 mb-3">Facial khusus pria untuk kulit bersih & segar</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">60 mnt</span><button onclick="bookTreatment('Men\'s Facial Care')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">♨️</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Men's Body Scrub</h4><p class="text-sm text-gray-500 mb-3">Scrub body khusus pria, bersihkan pori mendalam</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45 mnt</span><button onclick="bookTreatment('Men\'s Body Scrub')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+      </div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="cat-panel" id="panel-packages">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="treatment-card rounded-2xl p-5 shadow-sm border" style="background:linear-gradient(135deg,#fff,#fdf5f0);border-color:rgba(201,169,110,0.3)">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">🌸</span>
+            <span class="text-xs px-2 py-1 rounded-full font-medium" style="background:rgba(201,169,110,0.15);color:#9B7040">Popular</span>
+          </div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Relaxation Package</h4>
+          <p class="text-sm text-gray-500 mb-3">Body Massage + Body Scrub + Sauna</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-gray-400">2–3 jam</span><button onclick="bookTreatment('Relaxation Package')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div>
+        </div>
+        <div class="treatment-card rounded-2xl p-5 shadow-sm border" style="background:linear-gradient(135deg,#fff,#fdf0f8);border-color:rgba(209,40,132,0.2)">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">💆‍♀️</span>
+            <span class="text-xs px-2 py-1 rounded-full font-medium" style="background:rgba(209,40,132,0.1);color:var(--secondary)">Best Value</span>
+          </div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Beauty Package</h4>
+          <p class="text-sm text-gray-500 mb-3">Facial + Body Scrub + Hair Mask</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-gray-400">3 jam</span><button onclick="bookTreatment('Beauty Package')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div>
+        </div>
+        <div class="treatment-card rounded-2xl p-5 shadow-sm border" style="background:linear-gradient(135deg,#fff,#fdf5ef);border-color:rgba(107,67,55,0.15)">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">👨‍👩‍👧</span>
+            <span class="text-xs px-2 py-1 rounded-full font-medium" style="background:rgba(107,67,55,0.08);color:var(--primary)">Family</span>
+          </div>
+          <h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Family Package</h4>
+          <p class="text-sm text-gray-500 mb-3">Massage + Baby Spa + Creambath</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-gray-400">3–4 jam</span><button onclick="bookTreatment('Family Package')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BABY SPA -->
+    <div class="cat-panel" id="panel-baby">
+      <div class="p-6 rounded-2xl mb-6" style="background:linear-gradient(135deg,rgba(209,40,132,0.05),rgba(107,67,55,0.05))">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="text-2xl">🍼</span>
+          <p class="font-display text-xl" style="color:var(--primary);font-weight:400">Baby Spa by Rumah Wangi</p>
+        </div>
+        <p class="text-sm text-gray-500">Perawatan lembut dan aman untuk si kecil usia 0–6 tahun dengan terapis bersertifikat</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">👶</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Baby Massage</h4><p class="text-sm text-gray-500 mb-3">Pijat lembut bayi untuk tumbuh kembang optimal</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">30–45 mnt</span><button onclick="bookTreatment('Baby Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🏊</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Baby Swim</h4><p class="text-sm text-gray-500 mb-3">Renang bayi untuk stimulasi motorik & kesenangan</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">30 mnt</span><button onclick="bookTreatment('Baby Swim')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🛁</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Baby Bath</h4><p class="text-sm text-gray-500 mb-3">Mandi bayi dengan produk herbal aman</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">30 mnt</span><button onclick="bookTreatment('Baby Bath')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🧠</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Baby Brain Gym</h4><p class="text-sm text-gray-500 mb-3">Stimulasi otak & saraf bayi untuk kecerdasan</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">45 mnt</span><button onclick="bookTreatment('Baby Brain Gym')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm border" style="border-color:rgba(209,40,132,0.2)"><div class="text-2xl mb-3">🎁</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Baby Package</h4><p class="text-sm text-gray-500 mb-3">Paket lengkap: Massage + Swim + Brain Gym</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">90 mnt</span><button onclick="bookTreatment('Baby Package')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+      </div>
+    </div>
+
+    <!-- MOM & KIDS -->
+    <div class="cat-panel" id="panel-momkids">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🤱</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Postpartum Massage</h4><p class="text-sm text-gray-500 mb-3">Pijat pasca melahirkan untuk pemulihan total</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">90 mnt</span><button onclick="bookTreatment('Postpartum Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm"><div class="text-2xl mb-3">🍼</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Lactation Massage</h4><p class="text-sm text-gray-500 mb-3">Melancarkan ASI dan merawat payudara ibu menyusui</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">60 mnt</span><button onclick="bookTreatment('Lactation Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+        <div class="treatment-card bg-white rounded-2xl p-5 shadow-sm border" style="border-color:rgba(201,169,110,0.3)"><div class="text-2xl mb-3">👩‍👧</div><h4 class="font-display text-lg mb-1" style="color:var(--primary);font-weight:500">Mom & Baby Package</h4><p class="text-sm text-gray-500 mb-3">Paket spesial ibu & bayi, quality time bersama</p><div class="flex items-center justify-between"><span class="text-xs text-gray-400">2 jam</span><button onclick="bookTreatment('Mom & Baby Package')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(107,67,55,0.08);color:var(--primary)">Pesan →</button></div></div>
+      </div>
+    </div>
+
+    <!-- LYMPHATIC - SIGNATURE -->
+    <div class="cat-panel" id="panel-lymphatic">
+      <!-- Signature Banner -->
+      <div class="signature-card rounded-2xl p-6 mb-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-48 h-48 rounded-full -translate-y-1/2 translate-x-1/4 opacity-10" style="background:var(--secondary)"></div>
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="px-3 py-1 rounded-full text-xs font-semibold" style="background:linear-gradient(135deg,var(--gold),#a07030);color:white;letter-spacing:0.1em">✦ SIGNATURE TREATMENT ✦</div>
+          </div>
+          <h3 class="font-display text-2xl text-white mb-2" style="font-weight:300">Lymphatic & Slimming Program</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Treatment eksklusif untuk detoksifikasi, pembentukan tubuh, dan pemulihan optimal. Teknologi terkini dengan pendekatan holistik.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="treatment-card rounded-2xl p-5 shadow-sm" style="background:linear-gradient(135deg,#2a1510,#3d1a2a);color:white">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">🫀</span>
+            <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Premium</span>
+          </div>
+          <h4 class="font-display text-lg mb-1 text-white" style="font-weight:500">Lymphatic Massage</h4>
+          <p class="text-sm text-white/60 mb-3">Drainase limfatik manual untuk detoks & imunitas</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-white/40">75 mnt</span><button onclick="bookTreatment('Lymphatic Massage')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Pesan →</button></div>
+        </div>
+        <div class="treatment-card rounded-2xl p-5 shadow-sm" style="background:linear-gradient(135deg,#2a1510,#3d1a2a);color:white">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">🪵</span>
+            <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Premium</span>
+          </div>
+          <h4 class="font-display text-lg mb-1 text-white" style="font-weight:500">Lymphatic Madero</h4>
+          <p class="text-sm text-white/60 mb-3">Teknik Maderoterapia dengan alat kayu sculpting</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-white/40">75–90 mnt</span><button onclick="bookTreatment('Lymphatic Madero')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Pesan →</button></div>
+        </div>
+        <div class="treatment-card rounded-2xl p-5 shadow-sm" style="background:linear-gradient(135deg,#2a1510,#3d1a2a);color:white">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">⚡</span>
+            <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Premium</span>
+          </div>
+          <h4 class="font-display text-lg mb-1 text-white" style="font-weight:500">Lymphatic Microcurrent</h4>
+          <p class="text-sm text-white/60 mb-3">Teknologi microcurrent untuk kencangkan & slim</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-white/40">60 mnt</span><button onclick="bookTreatment('Lymphatic Microcurrent')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Pesan →</button></div>
+        </div>
+        <div class="treatment-card rounded-2xl p-5 shadow-sm" style="background:linear-gradient(135deg,#2a1510,#3d1a2a);color:white">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">🏃‍♀️</span>
+            <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(209,40,132,0.3);color:#f090c0">Slimming</span>
+          </div>
+          <h4 class="font-display text-lg mb-1 text-white" style="font-weight:500">Slimming Program</h4>
+          <p class="text-sm text-white/60 mb-3">Program pembentukan tubuh & pembakaran lemak</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-white/40">Program</span><button onclick="bookTreatment('Slimming Program')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Konsultasi →</button></div>
+        </div>
+        <div class="treatment-card rounded-2xl p-5 shadow-sm" style="background:linear-gradient(135deg,#2a1510,#3d1a2a);color:white">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">🌿</span>
+            <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(107,200,107,0.2);color:#7dd87d">Detox</span>
+          </div>
+          <h4 class="font-display text-lg mb-1 text-white" style="font-weight:500">Detox Program</h4>
+          <p class="text-sm text-white/60 mb-3">Detoksifikasi menyeluruh tubuh & revitalisasi energi</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-white/40">Program</span><button onclick="bookTreatment('Detox Program')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Konsultasi →</button></div>
+        </div>
+        <div class="treatment-card rounded-2xl p-5 shadow-sm" style="background:linear-gradient(135deg,#2a1510,#3d1a2a);color:white">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">🤱</span>
+            <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(209,40,132,0.3);color:#f090c0">Postpartum</span>
+          </div>
+          <h4 class="font-display text-lg mb-1 text-white" style="font-weight:500">Postpartum Recovery</h4>
+          <p class="text-sm text-white/60 mb-3">Program pemulihan pasca melahirkan komprehensif</p>
+          <div class="flex items-center justify-between"><span class="text-xs text-white/40">Program</span><button onclick="bookTreatment('Postpartum Recovery Program')" class="text-xs font-medium px-3 py-1.5 rounded-full" style="background:rgba(201,169,110,0.2);color:var(--gold)">Konsultasi →</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 5: CONSULTATION QUIZ ============ -->
+<section class="py-16 px-5" style="background:var(--bg)">
+  <div class="max-w-3xl mx-auto reveal">
+    <div class="text-center mb-10">
+      <p class="section-label mb-3">Treatment Finder</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-3" style="color:var(--primary);font-weight:400">What Is Your Main Concern?</h2>
+      <p class="text-sm text-gray-500 font-light">Kami akan rekomendasikan treatment terbaik untuk Anda</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8" id="quiz-grid">
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'body-pain','Nyeri Tubuh')">
+        <div class="text-2xl mb-2">🦴</div><p class="text-xs font-medium" style="color:var(--text)">Nyeri Tubuh</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'stress','Stres')">
+        <div class="text-2xl mb-2">😰</div><p class="text-xs font-medium" style="color:var(--text)">Stres</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'sleep','Susah Tidur')">
+        <div class="text-2xl mb-2">😴</div><p class="text-xs font-medium" style="color:var(--text)">Susah Tidur</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'puffiness','Wajah Bengkak')">
+        <div class="text-2xl mb-2">😶</div><p class="text-xs font-medium" style="color:var(--text)">Wajah Bengkak</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'acne','Jerawat')">
+        <div class="text-2xl mb-2">😣</div><p class="text-xs font-medium" style="color:var(--text)">Jerawat</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'dull','Kulit Kusam')">
+        <div class="text-2xl mb-2">😐</div><p class="text-xs font-medium" style="color:var(--text)">Kulit Kusam</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'sagging','Kulit Kendur')">
+        <div class="text-2xl mb-2">😟</div><p class="text-xs font-medium" style="color:var(--text)">Kulit Kendur</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'weightloss','Diet / BB')">
+        <div class="text-2xl mb-2">⚖️</div><p class="text-xs font-medium" style="color:var(--text)">Diet / Berat Badan</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'belly','Perut Buncit')">
+        <div class="text-2xl mb-2">🫃</div><p class="text-xs font-medium" style="color:var(--text)">Perut Buncit</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'postpartum','Pasca Melahirkan')">
+        <div class="text-2xl mb-2">🤱</div><p class="text-xs font-medium" style="color:var(--text)">Pasca Melahirkan</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'babysleep','Bayi Susah Tidur')">
+        <div class="text-2xl mb-2">👶</div><p class="text-xs font-medium" style="color:var(--text)">Bayi Susah Tidur</p>
+      </div>
+      <div class="quiz-option bg-white rounded-2xl p-4 text-center" onclick="selectQuiz(this,'colic','Kolik Bayi')">
+        <div class="text-2xl mb-2">😭</div><p class="text-xs font-medium" style="color:var(--text)">Kolik Bayi</p>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="quiz-result" class="hidden rounded-2xl p-6" style="background:linear-gradient(135deg,rgba(107,67,55,0.06),rgba(209,40,132,0.06));border:1px solid rgba(209,40,132,0.15)">
+      <p class="section-label mb-2">Rekomendasi Kami</p>
+      <h3 class="font-display text-xl mb-3" style="color:var(--primary);font-weight:400" id="quiz-title">Treatment Recommendation</h3>
+      <p class="text-sm text-gray-600 mb-4" id="quiz-desc"></p>
+      <div class="flex flex-wrap gap-2 mb-4" id="quiz-tags"></div>
+      <a id="quiz-wa-link" href="#" target="_blank" class="btn-primary inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Konsultasi via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 6: PRICE LIST ============ -->
+<section id="prices" class="py-16 px-5" style="background:var(--bg-light)">
+  <div class="max-w-4xl mx-auto reveal">
+    <div class="text-center mb-10">
+      <p class="section-label mb-3">Harga Transparan</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-3" style="color:var(--primary);font-weight:400">Price List</h2>
+      <p class="text-sm text-gray-500 font-light">Harga berbeda per cabang, silakan pilih cabang Anda</p>
+    </div>
+
+    <!-- Branch Tabs -->
+    <div class="flex gap-1 p-1 rounded-xl mb-8 max-w-xs mx-auto" style="background:rgba(107,67,55,0.1)">
+      <button class="tab-btn flex-1 py-2.5 rounded-lg text-sm font-medium active" onclick="switchPriceTab('indramayu',this)" id="tab-indramayu" style="background:white;color:var(--primary)">Indramayu</button>
+      <button class="tab-btn flex-1 py-2.5 rounded-lg text-sm font-medium" onclick="switchPriceTab('terisi',this)" id="tab-terisi" style="color:var(--primary)">Terisi</button>
+    </div>
+
+    <!-- INDRAMAYU PRICES -->
+    <div id="price-indramayu">
+      <div class="space-y-4">
+        <!-- Body Massage -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+          <div class="px-5 py-3 flex items-center justify-between" style="background:linear-gradient(135deg,rgba(107,67,55,0.06),rgba(107,67,55,0.02))">
+            <h4 class="font-display text-lg" style="color:var(--primary);font-weight:500">💆 Body Massage</h4>
+          </div>
+          <table class="w-full">
+            <tbody>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Javanese Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 80.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Balinese Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 95.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Aromatherapy Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 110.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Mom To Be Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 120.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Reflexology</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 70.000</span></td></tr>
+              <tr class="price-row"><td class="px-5 py-3 text-sm text-gray-700">Back Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 65.000</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Body Treatment -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+          <div class="px-5 py-3 flex items-center justify-between" style="background:linear-gradient(135deg,rgba(107,67,55,0.06),rgba(107,67,55,0.02))">
+            <h4 class="font-display text-lg" style="color:var(--primary);font-weight:500">🛁 Body Treatment</h4>
+          </div>
+          <table class="w-full">
+            <tbody>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Body Scrub</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 85.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Body Mask</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 90.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Sauna</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 50.000</span></td></tr>
+              <tr class="price-row"><td class="px-5 py-3 text-sm text-gray-700">Breast Care</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 100.000</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Facial -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+          <div class="px-5 py-3" style="background:linear-gradient(135deg,rgba(107,67,55,0.06),rgba(107,67,55,0.02))">
+            <h4 class="font-display text-lg" style="color:var(--primary);font-weight:500">✨ Facial Treatment</h4>
+          </div>
+          <table class="w-full">
+            <tbody>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Anti Aging Facial</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 150.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Acne Facial</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 140.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Skin Tightening Facial</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 160.000</span></td></tr>
+              <tr class="price-row"><td class="px-5 py-3 text-sm text-gray-700">Accu Derma</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 200.000</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Baby Spa -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+          <div class="px-5 py-3" style="background:linear-gradient(135deg,rgba(209,40,132,0.06),rgba(209,40,132,0.02))">
+            <h4 class="font-display text-lg" style="color:var(--primary);font-weight:500">🍼 Baby Spa</h4>
+          </div>
+          <table class="w-full">
+            <tbody>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Baby Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 65.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Baby Swim</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 50.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Baby Bath</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 45.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Baby Brain Gym</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 75.000</span></td></tr>
+              <tr class="price-row"><td class="px-5 py-3 text-sm text-gray-700">Baby Package</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 150.000</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Lymphatic -->
+        <div class="rounded-2xl overflow-hidden shadow-sm" style="background:linear-gradient(135deg,#2a1510,#4a1f30)">
+          <div class="px-5 py-3 flex items-center gap-2">
+            <h4 class="font-display text-lg text-white" style="font-weight:500">⭐ Lymphatic & Signature</h4>
+            <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(201,169,110,0.25);color:var(--gold)">Eksklusif</span>
+          </div>
+          <table class="w-full">
+            <tbody>
+              <tr class="border-b border-white/10"><td class="px-5 py-3 text-sm text-white/70">Lymphatic Massage</td><td class="px-5 py-3 text-right"><span class="text-xs px-2 py-1 rounded-full font-medium" style="background:rgba(201,169,110,0.2);color:var(--gold)">Rp 200.000</span></td></tr>
+              <tr class="border-b border-white/10"><td class="px-5 py-3 text-sm text-white/70">Lymphatic Madero</td><td class="px-5 py-3 text-right"><span class="text-xs px-2 py-1 rounded-full font-medium" style="background:rgba(201,169,110,0.2);color:var(--gold)">Rp 250.000</span></td></tr>
+              <tr class="border-b border-white/10"><td class="px-5 py-3 text-sm text-white/70">Lymphatic Microcurrent</td><td class="px-5 py-3 text-right"><span class="text-xs px-2 py-1 rounded-full font-medium" style="background:rgba(201,169,110,0.2);color:var(--gold)">Rp 275.000</span></td></tr>
+              <tr class="border-b border-white/10"><td class="px-5 py-3 text-sm text-white/70">Slimming Program (per sesi)</td><td class="px-5 py-3 text-right"><span class="text-xs px-2 py-1 rounded-full font-medium" style="background:rgba(201,169,110,0.2);color:var(--gold)">Mulai Rp 300.000</span></td></tr>
+              <tr><td class="px-5 py-3 text-sm text-white/70">Postpartum Recovery</td><td class="px-5 py-3 text-right"><span class="text-xs px-2 py-1 rounded-full font-medium" style="background:rgba(201,169,110,0.2);color:var(--gold)">Mulai Rp 250.000</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-gray-400 text-center">* Harga dapat berubah sewaktu-waktu. Hubungi kami untuk informasi terkini.</p>
+      </div>
+    </div>
+
+    <!-- TERISI PRICES -->
+    <div id="price-terisi" class="hidden">
+      <div class="space-y-4">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+          <div class="px-5 py-3" style="background:linear-gradient(135deg,rgba(107,67,55,0.06),rgba(107,67,55,0.02))">
+            <h4 class="font-display text-lg" style="color:var(--primary);font-weight:500">💆 Body Massage</h4>
+          </div>
+          <table class="w-full">
+            <tbody>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Javanese Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 75.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Balinese Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 90.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Aromatherapy Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 100.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Mom To Be Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 110.000</span></td></tr>
+              <tr class="price-row"><td class="px-5 py-3 text-sm text-gray-700">Reflexology</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 65.000</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+          <div class="px-5 py-3" style="background:linear-gradient(135deg,rgba(107,67,55,0.06),rgba(107,67,55,0.02))">
+            <h4 class="font-display text-lg" style="color:var(--primary);font-weight:500">✨ Facial Treatment</h4>
+          </div>
+          <table class="w-full">
+            <tbody>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Anti Aging Facial</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 140.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Acne Facial</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 130.000</span></td></tr>
+              <tr class="price-row"><td class="px-5 py-3 text-sm text-gray-700">Dark Spot Facial</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 145.000</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+          <div class="px-5 py-3" style="background:linear-gradient(135deg,rgba(209,40,132,0.06),rgba(209,40,132,0.02))">
+            <h4 class="font-display text-lg" style="color:var(--primary);font-weight:500">🍼 Baby Spa</h4>
+          </div>
+          <table class="w-full">
+            <tbody>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Baby Massage</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 60.000</span></td></tr>
+              <tr class="price-row border-b border-gray-50"><td class="px-5 py-3 text-sm text-gray-700">Baby Swim</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 45.000</span></td></tr>
+              <tr class="price-row"><td class="px-5 py-3 text-sm text-gray-700">Baby Package</td><td class="px-5 py-3 text-right"><span class="price-badge">Rp 135.000</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-gray-400 text-center">* Harga dapat berubah sewaktu-waktu. Hubungi kami untuk informasi terkini.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 7: BOOKING FORM ============ -->
+<section id="booking" class="py-16 px-5" style="background:var(--bg)">
+  <div class="max-w-2xl mx-auto reveal">
+    <div class="text-center mb-10">
+      <p class="section-label mb-3">Reservasi</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-3" style="color:var(--primary);font-weight:400">Book Your Treatment</h2>
+      <p class="text-sm text-gray-500 font-light">Isi form ini dan tim kami akan segera konfirmasi via WhatsApp</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm">
+      <div class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">Nama Lengkap *</label>
+            <input type="text" id="b-name" class="form-input" placeholder="Nama Anda">
+          </div>
+          <div>
+            <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">No. WhatsApp *</label>
+            <input type="tel" id="b-phone" class="form-input" placeholder="08xx-xxxx-xxxx">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">Pilih Cabang *</label>
+            <div class="relative">
+              <select id="b-branch" class="form-input pr-10">
+                <option value="">-- Pilih Cabang --</option>
+                <option value="Indramayu (Main Branch)">Indramayu (Main Branch)</option>
+                <option value="Terisi">Terisi</option>
+              </select>
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">Jenis Kelamin *</label>
+            <div class="relative">
+              <select id="b-gender" class="form-input pr-10">
+                <option value="">-- Pilih --</option>
+                <option>Wanita</option>
+                <option>Pria</option>
+                <option>Bayi Perempuan</option>
+                <option>Bayi Laki-laki</option>
+              </select>
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">Kategori Treatment *</label>
+            <div class="relative">
+              <select id="b-category" class="form-input pr-10">
+                <option value="">-- Pilih Kategori --</option>
+                <option>Body Massage</option>
+                <option>Body Treatment</option>
+                <option>Facial Treatment</option>
+                <option>Salon Treatment</option>
+                <option>Gentlemen Treatment</option>
+                <option>Spa Package</option>
+                <option>Baby Spa</option>
+                <option>Mom & Kids</option>
+                <option>Lymphatic / Signature</option>
+              </select>
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">Nama Treatment</label>
+            <input type="text" id="b-treatment" class="form-input" placeholder="Contoh: Javanese Massage">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">Tanggal *</label>
+            <input type="date" id="b-date" class="form-input">
+          </div>
+          <div>
+            <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">Waktu *</label>
+            <div class="relative">
+              <select id="b-time" class="form-input pr-10">
+                <option value="">-- Pilih Waktu --</option>
+                <option>09:00</option><option>10:00</option><option>11:00</option>
+                <option>12:00</option><option>13:00</option><option>14:00</option>
+                <option>15:00</option><option>16:00</option><option>17:00</option>
+                <option>18:00</option><option>19:00</option>
+              </select>
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-medium text-gray-500 mb-1.5 block uppercase tracking-wider">Catatan Tambahan</label>
+          <textarea id="b-notes" class="form-input" rows="3" placeholder="Alergi, kondisi khusus, permintaan tertentu..."></textarea>
+        </div>
+
+        <button onclick="submitBooking()" class="btn-primary w-full py-4 rounded-2xl font-medium text-base flex items-center justify-center gap-2 mt-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Kirim via WhatsApp
+        </button>
+        <p class="text-xs text-gray-400 text-center">Form ini akan membuka WhatsApp secara otomatis</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 8: WHATSAPP CTA ============ -->
+<section class="py-14 px-5" style="background:linear-gradient(135deg,var(--primary),#9B3070)">
+  <div class="max-w-2xl mx-auto text-center reveal">
+    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 bg-white/10 backdrop-blur-sm">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+    <h2 class="font-display text-3xl md:text-4xl text-white mb-3" style="font-weight:300">Still Not Sure Which Treatment<br>Is Right For You?</h2>
+    <p class="text-white/70 mb-8 leading-relaxed">Tim terapis profesional kami siap membantu Anda memilih treatment terbaik sesuai kebutuhan dan kondisi tubuh Anda.</p>
+    <a href="https://wa.me/6281234567890?text=Halo%20Rumah%20Wangi%20Living%20Spa%2C%20saya%20ingin%20konsultasi%20treatment" target="_blank" class="inline-flex items-center gap-3 bg-white px-8 py-4 rounded-full font-semibold text-base hover:shadow-2xl transition-all hover:-translate-y-1" style="color:var(--primary)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color:#25D166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Konsultasi via WhatsApp
+    </a>
+    <p class="text-white/40 text-xs mt-4">Respon cepat • Gratis konsultasi • Tanpa tekanan</p>
+  </div>
+</section>
+
+<!-- ============ SECTION 9: TRUST BUILDERS ============ -->
+<section id="about" class="py-16 px-5" style="background:var(--bg-light)">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <p class="section-label mb-3">Mengapa Kami</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-3" style="color:var(--primary);font-weight:400">Why Choose Rumah Wangi?</h2>
+    </div>
+
+    <!-- Trust Points -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14 reveal">
+      <div class="bg-white rounded-2xl p-5 text-center shadow-sm">
+        <div class="text-3xl mb-3">👩‍⚕️</div>
+        <p class="font-display text-base mb-1" style="color:var(--primary);font-weight:500">Terapis Bersertifikat</p>
+        <p class="text-xs text-gray-500">Terlatih & profesional</p>
+      </div>
+      <div class="bg-white rounded-2xl p-5 text-center shadow-sm">
+        <div class="text-3xl mb-3">🌿</div>
+        <p class="font-display text-base mb-1" style="color:var(--primary);font-weight:500">Produk Alami</p>
+        <p class="text-xs text-gray-500">Herbal & aman kulit</p>
+      </div>
+      <div class="bg-white rounded-2xl p-5 text-center shadow-sm">
+        <div class="text-3xl mb-3">🏠</div>
+        <p class="font-display text-base mb-1" style="color:var(--primary);font-weight:500">Ruangan Nyaman</p>
+        <p class="text-xs text-gray-500">Bersih, tenang, privat</p>
+      </div>
+      <div class="bg-white rounded-2xl p-5 text-center shadow-sm">
+        <div class="text-3xl mb-3">👨‍👩‍👧‍👦</div>
+        <p class="font-display text-base mb-1" style="color:var(--primary);font-weight:500">Family Friendly</p>
+        <p class="text-xs text-gray-500">Untuk semua usia</p>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="reveal">
+      <p class="text-center section-label mb-8">Testimoni Pelanggan</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="testimonial-card bg-white rounded-2xl p-6 shadow-sm">
+          <div class="stars mb-3 text-sm">★★★★★</div>
+          <p class="text-sm text-gray-600 mb-4 leading-relaxed italic">"Pelayanannya luar biasa! Terapisnya sangat profesional, kamarnya bersih dan nyaman. Pasti akan balik lagi untuk treatment selanjutnya."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background:linear-gradient(135deg,var(--primary),var(--secondary))">S</div>
+            <div>
+              <p class="text-sm font-medium" style="color:var(--text)">Siti Rahma</p>
+              <p class="text-xs text-gray-400">Indramayu · Baby Spa</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card bg-white rounded-2xl p-6 shadow-sm">
+          <div class="stars mb-3 text-sm">★★★★★</div>
+          <p class="text-sm text-gray-600 mb-4 leading-relaxed italic">"Lymphatic Madero hasilnya amazing! Perut terasa lebih langsing setelah beberapa sesi. Sangat recommend untuk yang ingin slimming."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background:linear-gradient(135deg,#9B3070,var(--secondary))">D</div>
+            <div>
+              <p class="text-sm font-medium" style="color:var(--text)">Dewi Lestari</p>
+              <p class="text-xs text-gray-400">Indramayu · Lymphatic</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card bg-white rounded-2xl p-6 shadow-sm">
+          <div class="stars mb-3 text-sm">★★★★★</div>
+          <p class="text-sm text-gray-600 mb-4 leading-relaxed italic">"Baby swim dan baby massage sangat direkomendasikan untuk tumbuh kembang si kecil. Terapisnya sabar dan bayi saya sangat happy!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background:linear-gradient(135deg,var(--gold),#9B7040)">A</div>
+            <div>
+              <p class="text-sm font-medium" style="color:var(--text)">Anisa Putri</p>
+              <p class="text-xs text-gray-400">Terisi · Baby Spa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 10: FAQ ============ -->
+<section class="py-16 px-5" style="background:var(--bg)">
+  <div class="max-w-2xl mx-auto reveal">
+    <div class="text-center mb-10">
+      <p class="section-label mb-3">FAQ</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-3" style="color:var(--primary);font-weight:400">Pertanyaan Umum</h2>
+    </div>
+    <div class="space-y-3">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+        <button class="faq-toggle w-full text-left px-5 py-4 flex items-center justify-between" onclick="toggleFaq(this)">
+          <span class="font-medium text-sm" style="color:var(--text)">Apakah harus reservasi terlebih dahulu?</span>
+          <svg class="faq-icon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Reservasi sangat disarankan agar waktu dan terapis bisa disiapkan untuk Anda. Reservasi bisa dilakukan via WhatsApp atau form di website ini. Walk-in juga diterima sesuai ketersediaan.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+        <button class="faq-toggle w-full text-left px-5 py-4 flex items-center justify-between" onclick="toggleFaq(this)">
+          <span class="font-medium text-sm" style="color:var(--text)">Apakah ibu hamil boleh melakukan treatment?</span>
+          <svg class="faq-icon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ya! Kami memiliki Mom To Be Massage yang dirancang khusus dan aman untuk ibu hamil. Terapis kami terlatih untuk menangani ibu hamil dengan teknik yang tepat dan produk yang aman.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+        <button class="faq-toggle w-full text-left px-5 py-4 flex items-center justify-between" onclick="toggleFaq(this)">
+          <span class="font-medium text-sm" style="color:var(--text)">Apakah Baby Spa aman untuk bayi?</span>
+          <svg class="faq-icon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Sangat aman! Baby Spa kami menggunakan produk khusus bayi yang hipoalergenik, terapis bersertifikat perawatan bayi, dan fasilitas yang dirancang untuk keamanan si kecil. Orang tua bisa mendampingi selama treatment.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+        <button class="faq-toggle w-full text-left px-5 py-4 flex items-center justify-between" onclick="toggleFaq(this)">
+          <span class="font-medium text-sm" style="color:var(--text)">Treatment apa yang terbaik untuk stres?</span>
+          <svg class="faq-icon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Kami merekomendasikan Aromatherapy Massage atau Balinese Massage untuk mengatasi stres. Kombinasi pijatan relaksasi dan essential oil terpilih terbukti efektif menenangkan pikiran dan tubuh. Konsultasikan kondisi Anda ke tim kami.</p></div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+        <button class="faq-toggle w-full text-left px-5 py-4 flex items-center justify-between" onclick="toggleFaq(this)">
+          <span class="font-medium text-sm" style="color:var(--text)">Treatment apa terbaik untuk pemulihan pasca melahirkan?</span>
+          <svg class="faq-icon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Program Postpartum Recovery kami adalah yang terlengkap. Mencakup Postpartum Massage, Lactation Massage, Lymphatic Drainage, dan program slimming khusus ibu pasca melahirkan. Konsultasi gratis via WhatsApp untuk program yang sesuai kondisi Anda.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="py-12 px-5" style="background:var(--text)">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,var(--primary),var(--secondary))">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M12 13v9"/></svg>
+          </div>
+          <div>
+            <p class="text-white font-display text-base leading-tight font-medium">Rumah Wangi</p>
+            <p class="text-xs leading-tight" style="color:var(--gold-light);letter-spacing:0.1em">LIVING SPA</p>
+          </div>
+        </div>
+        <p class="text-sm text-white/50 leading-relaxed">Premium wellness & beauty spa untuk Anda dan keluarga. Percayakan perawatan terbaik kepada terapis profesional kami.</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-white/30 mb-4">Cabang Kami</p>
+        <div class="space-y-3">
+          <div>
+            <p class="text-sm font-medium text-white">Indramayu (Main Branch)</p>
+            <p class="text-xs text-white/40 mt-0.5">Indramayu, Jawa Barat</p>
+            <p class="text-xs text-white/40">Buka: 09.00 – 20.00 WIB</p>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-white">Terisi Branch</p>
+            <p class="text-xs text-white/40 mt-0.5">Terisi, Indramayu</p>
+            <p class="text-xs text-white/40">Buka: 09.00 – 20.00 WIB</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-white/30 mb-4">Hubungi Kami</p>
+        <a href="https://wa.me/6281234567890" target="_blank" class="flex items-center gap-3 text-white/70 hover:text-white transition-colors mb-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span class="text-sm">WhatsApp Indramayu</span>
+        </a>
+        <a href="https://wa.me/6281234567891" target="_blank" class="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span class="text-sm">WhatsApp Terisi</span>
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 text-center">
+      <p class="text-xs text-white/30">© 2025 Rumah Wangi Living Spa. All rights reserved. Crafted with 💗 for wellness.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING WA BUTTON ============ -->
+<a href="https://wa.me/6281234567890?text=Halo%20Rumah%20Wangi%20Living%20Spa%2C%20saya%20ingin%20konsultasi%20treatment" target="_blank" class="wa-float w-14 h-14 rounded-full flex items-center justify-center shadow-xl" style="background:#25D166">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ============ STICKY CTA (MOBILE) ============ -->
+<div class="sticky-cta md:hidden py-3 px-5" id="sticky-cta">
+  <a href="#booking" class="btn-primary w-full py-3.5 rounded-xl font-medium text-sm flex items-center justify-center gap-2">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Book Treatment Sekarang
+  </a>
+</div>
+
+<script>
+  // ===== NAV SCROLL =====
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 80);
+    // Sticky CTA
+    const cta = document.getElementById('sticky-cta');
+    if (window.scrollY > 400) cta.classList.add('show');
+    else cta.classList.remove('show');
+  });
+
+  // ===== MOBILE MENU =====
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  }
+
+  // ===== BRANCH SELECT =====
+  let selectedBranch = '';
+  function selectBranch(branch) {
+    selectedBranch = branch;
+    document.querySelectorAll('.branch-card').forEach(c => c.classList.remove('active'));
+    document.querySelector(`[data-branch="${branch}"]`).classList.add('active');
+    // Toggle check/select text
+    ['indramayu','terisi'].forEach(b => {
+      document.getElementById(`check-${b}`).classList.add('hidden');
+      document.getElementById(`check-${b}`).classList.remove('flex');
+      document.getElementById(`select-${b}`).classList.remove('hidden');
+    });
+    document.getElementById(`check-${branch}`).classList.remove('hidden');
+    document.getElementById(`check-${branch}`).classList.add('flex');
+    document.getElementById(`select-${branch}`).classList.add('hidden');
+    // Update price tab
+    switchPriceTab(branch, document.getElementById(`tab-${branch}`));
+    // Set booking form
+    const sel = document.getElementById('b-branch');
+    sel.value = branch === 'indramayu' ? 'Indramayu (Main Branch)' : 'Terisi';
+  }
+
+  // ===== PERSON SELECT =====
+  function selectPerson(el, type) {
+    document.querySelectorAll('.person-card').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    const recos = {
+      'female': 'Aromatherapy Massage, Facial Treatment, Body Scrub, Hair Spa tersedia untuk Anda.',
+      'male': 'Men\'s Deep Tissue, Reflexology, dan Gentlemen Treatment tersedia.',
+      'baby-girl': 'Baby Massage, Baby Swim, Baby Bath, Baby Brain Gym tersedia.',
+      'baby-boy': 'Baby Massage, Baby Swim, Baby Bath, Baby Brain Gym tersedia.',
+      'pregnant': 'Mom To Be Massage, Breast Care, dan konsultasi Lymphatic tersedia.',
+      'postpartum': 'Postpartum Massage, Lactation Massage, dan Postpartum Recovery Program tersedia.'
+    };
+    document.getElementById('person-reco').classList.remove('hidden');
+    document.getElementById('person-reco-text').textContent = recos[type] || 'Konsultasikan kebutuhan Anda kepada tim kami.';
+    const genderMap = {'female':'Wanita','male':'Pria','baby-girl':'Bayi Perempuan','baby-boy':'Bayi Laki-laki','pregnant':'Wanita','postpartum':'Wanita'};
+    document.getElementById('b-gender').value = genderMap[type] || '';
+  }
+
+  // ===== CATEGORY TABS =====
+  function switchCat(cat, btn) {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.cat-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(`panel-${cat}`).classList.add('active');
+  }
+
+  // ===== PRICE TABS =====
+  function switchPriceTab(branch, btn) {
+    document.getElementById('price-indramayu').classList.add('hidden');
+    document.getElementById('price-terisi').classList.add('hidden');
+    document.querySelectorAll('.tab-btn').forEach(t => {
+      t.classList.remove('active');
+      t.style.background = '';
+      t.style.color = 'var(--primary)';
+    });
+    btn.classList.add('active');
+    btn.style.background = 'white';
+    document.getElementById(`price-${branch}`).classList.remove('hidden');
+  }
+
+  // ===== QUIZ =====
+  const quizData = {
+    'body-pain': { title: 'Nyeri Tubuh', desc: 'Kami rekomendasikan Javanese Massage atau Deep Tissue. Teknik pijatan mendalam akan membantu mengendurkan otot tegang dan mengurangi nyeri.', tags: ['Javanese Massage','Balinese Massage','Reflexology'] },
+    'stress': { title: 'Stres & Kelelahan', desc: 'Aromatherapy Massage atau Balinese Massage adalah pilihan terbaik. Essential oil lavender dan eucalyptus akan menenangkan sistem saraf Anda.', tags: ['Aromatherapy Massage','Balinese Massage','Body Bath'] },
+    'sleep': { title: 'Susah Tidur', desc: 'Aromatherapy Massage dengan essential oil chamomile dan lavender terbukti meningkatkan kualitas tidur secara signifikan.', tags: ['Aromatherapy Massage','Reflexology'] },
+    'puffiness': { title: 'Wajah Bengkak', desc: 'Lymphatic Massage untuk wajah dan Totok Wajah akan membantu mengalirkan cairan berlebih dan mengurangi puffiness.', tags: ['Lymphatic Massage','Totok Wajah','Anti Aging Facial'] },
+    'acne': { title: 'Masalah Jerawat', desc: 'Acne Facial dengan deep cleansing profesional akan membersihkan pori dan mengurangi peradangan. Konsultasikan kondisi kulit Anda.', tags: ['Acne Facial','Accu Derma'] },
+    'dull': { title: 'Kulit Kusam', desc: 'Body Scrub + Dark Spot Facial adalah kombinasi sempurna untuk kulit cerah bercahaya. Eksfoliasi menyeluruh untuk kulit baru.', tags: ['Body Scrub','Dark Spot Facial','Body Mask'] },
+    'sagging': { title: 'Kulit Kendur', desc: 'Lymphatic Microcurrent dan Skin Tightening Facial menggunakan teknologi terkini untuk mengencangkan kulit secara efektif.', tags: ['Skin Tightening Facial','Lymphatic Microcurrent','Anti Aging Facial'] },
+    'weightloss': { title: 'Diet & Berat Badan', desc: 'Slimming Program kami menggabungkan Lymphatic Madero, diet guidance, dan treatment sculpting untuk hasil optimal.', tags: ['Slimming Program','Lymphatic Madero','Detox Program'] },
+    'belly': { title: 'Perut Buncit', desc: 'Lymphatic Madero dengan teknik Maderoterapia dan Slimming Program akan membantu membentuk perut lebih ramping.', tags: ['Lymphatic Madero','Slimming Program'] },
+    'postpartum': { title: 'Pemulihan Pasca Melahirkan', desc: 'Postpartum Recovery Program kami komprehensif: Postpartum Massage, Lactation Massage, dan Lymphatic untuk pemulihan optimal.', tags: ['Postpartum Recovery Program','Postpartum Massage','Lactation Massage'] },
+    'babysleep': { title: 'Bayi Susah Tidur', desc: 'Baby Massage dan Baby Brain Gym terbukti membantu bayi tidur lebih nyenyak dan teratur polanya.', tags: ['Baby Massage','Baby Brain Gym'] },
+    'colic': { title: 'Kolik Bayi', desc: 'Baby Massage dengan teknik khusus untuk meredakan kolik sangat efektif dilakukan secara rutin.', tags: ['Baby Massage','Baby Package'] },
+  };
+  const waNumber = '6281234567890';
+
+  function selectQuiz(el, key, label) {
+    document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    const data = quizData[key];
+    const result = document.getElementById('quiz-result');
+    document.getElementById('quiz-title').textContent = `Rekomendasi untuk: ${data.title}`;
+    document.getElementById('quiz-desc').textContent = data.desc;
+    const tags = document.getElementById('quiz-tags');
+    tags.innerHTML = data.tags.map(t => `<span class="text-xs px-3 py-1.5 rounded-full font-medium" style="background:rgba(107,67,55,0.08);color:var(--primary)">${t}</span>`).join('');
+    const waMsg = encodeURIComponent(`Halo Rumah Wangi Living Spa! Saya memiliki kekhawatiran: ${label}. Berdasarkan quiz, saya tertarik dengan: ${data.tags.join(', ')}. Bisa konsultasikan treatment yang tepat untuk saya?`);
+    document.getElementById('quiz-wa-link').href = `https://wa.me/${waNumber}?text=${waMsg}`;
+    result.classList.remove('hidden');
+    setTimeout(() => result.scrollIntoView({behavior:'smooth',block:'nearest'}), 100);
+  }
+
+  // ===== BOOK TREATMENT (from treatment cards) =====
+  function bookTreatment(treatment) {
+    document.getElementById('b-treatment').value = treatment;
+    document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+  }
+
+  // ===== BOOKING FORM SUBMIT =====
+  function submitBooking() {
+    const name = document.getElementById('b-name').value.trim();
+    const phone = document.getElementById('b-phone').value.trim();
+    const branch = document.getElementById('b-branch').value;
+    const gender = document.getElementById('b-gender').value;
+    const category = document.getElementById('b-category').value;
+    const treatment = document.getElementById('b-treatment').value.trim();
+    const date = document.getElementById('b-date').value;
+    const time = document.getElementById('b-time').value;
+    const notes = document.getElementById('b-notes').value.trim();
+
+    if (!name || !phone || !branch) {
+      alert('Mohon lengkapi nama, nomor WhatsApp, dan pilih cabang terlebih dahulu.');
+      return;
+    }
+
+    const msg = `Halo Rumah Wangi Living Spa! 🌸
+
+Saya ingin melakukan reservasi:
+
+👤 *Nama:* ${name}
+📱 *WhatsApp:* ${phone}
+🏠 *Cabang:* ${branch}
+${gender ? `⚧ *Untuk:* ${gender}` : ''}
+${category ? `📂 *Kategori:* ${category}` : ''}
+${treatment ? `💆 *Treatment:* ${treatment}` : ''}
+${date ? `📅 *Tanggal:* ${date}` : ''}
+${time ? `⏰ *Waktu:* ${time} WIB` : ''}
+${notes ? `📝 *Catatan:* ${notes}` : ''}
+
+Mohon konfirmasi ketersediaan. Terima kasih! 🙏`;
+
+    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  // ===== FAQ TOGGLE =====
+  function toggleFaq(btn) {
+    const body = btn.nextElementSibling;
+    const icon = btn.querySelector('.faq-icon');
+    body.classList.toggle('open');
+    icon.classList.toggle('open');
+  }
+
+  // ===== SCROLL REVEAL =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Set min date for booking
+  document.getElementById('b-date').min = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
